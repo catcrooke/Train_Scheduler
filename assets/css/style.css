@@ -4,9 +4,15 @@ body {
     background-size: cover;
 }
 
-.jumbotron {
+.jumbotron,
+#header-one {
     background-color: rgb(182, 57, 138);
     color: white;
+}
+
+#header-one {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 h1 {

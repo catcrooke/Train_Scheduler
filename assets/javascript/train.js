@@ -10,6 +10,13 @@ $(document).ready(function() {
     //     var cell5 = row.insertCell(5);
     // });
 
+    // should be getting the x
+    // var trainSchedule = [
+    //     {
+    //         train: '',
+    //         times: '',
+    //     }
+    // ];
 
     // Initialize Firebase
     var config = {
@@ -29,8 +36,20 @@ $(document).ready(function() {
     var frequency = "";
     var nextArrival = "";
     var minutesAway = "";
-    var timeNow = "";
-    var startTime = "";
+    var now = moment();
+    console.log(now);
+    var startTime;
+
+    // frequency requires knowing the start time. have to make up start time
+    // for each train build a schedule
+    // user inputs set the startTime
+    // compare to current time
+    // find train that meets condition- next train has to be > current time
+
+    // complete a for loop that iterates through the train schedule by adding the frequency
+    // and then stops as soon as the next train time is > current time. display in the html that next train time
+    // and subtract current time from next train to create minutes away
+
 
     //When the submit for the form is clicked
     $('#submit-train').on('click', function() {
@@ -60,31 +79,39 @@ $(document).ready(function() {
     });
 
     // // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
-    // database.ref().on("child_added", function(childSnapshot) {
+    database.ref().on("child_added", function(childSnapshot) {
 
-    //     // Log everything that's coming out of snapshot
-    //     console.log(childSnapshot.val().name);
-    //     console.log(childSnapshot.val().role);
-    //     console.log(childSnapshot.val().startDate);
-    //     console.log(childSnapshot.val().monthlyRate);
-    //     console.log(childSnapshot.val().dateAdded);
-    //     console.log(childSnapshot.val().monthsWorked);
-    //     console.log(childSnapshot.val().billed);
+        //     // Log everything that's coming out of snapshot
+        console.log(childSnapshot.val().trainName);
 
-    //     var row = $('<tr>');
-
-    //     $(row).append($('<td>').text(childSnapshot.val().name));
-    //     $(row).append($('<td>').text(childSnapshot.val().role));
-    //     $(row).append($('<td>').text(childSnapshot.val().startDate));
-    //     $(row).append($('<td>').text(childSnapshot.val().monthsWorked));
-    //     $(row).append($('<td>').text("$" + childSnapshot.val().monthlyRate));
-    //     $(row).append($('<td>').text("$" + childSnapshot.val().billed));
-    //     $('#table-body').append(row);
+        //     console.log(childSnapshot.val().role);
+        //     console.log(childSnapshot.val().startDate);
+        //     console.log(childSnapshot.val().monthlyRate);
+        //     console.log(childSnapshot.val().dateAdded);
+        //     console.log(childSnapshot.val().monthsWorked);
+        //     console.log(childSnapshot.val().billed);
+        // var row = $('<tr>');
 
 
-    //     // Handle the errors
-    // }, function(errorObject) {
-    //     console.log("Errors handled: " + errorObject.code);
-    // });
+        // $(row).append($('<td>').text(childSnapshot.val().trainName));
+
+
+        //     $(row).append($('<td>').text(childSnapshot.val().role));
+        //     $(row).append($('<td>').text(childSnapshot.val().startDate));
+        //     $(row).append($('<td>').text(childSnapshot.val().monthsWorked));
+        //     $(row).append($('<td>').text("$" + childSnapshot.val().monthlyRate));
+        //     $(row).append($('<td>').text("$" + childSnapshot.val().billed));
+        //     $('#table-body').append(row);
+
+
+        //     // Handle the errors
+        // },
+        // function(errorObject) {
+        //     console.log("Errors handled: " + errorObject.code);
+
+    });
+
+
+
 
 });
