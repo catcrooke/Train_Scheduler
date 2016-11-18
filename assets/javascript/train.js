@@ -33,12 +33,12 @@ $(document).ready(function() {
     //Global variables
     var trainName = "";
     var destination = "";
-    var frequency = "";
-    var nextArrival = "";
+    var frequency;
+    var nextArrival;
     var minutesAway = "";
-    var now = moment();
-    console.log(now);
-    var startTime;
+    var currentTime = moment();
+    console.log(currentTime);
+    var initialTrain;
 
     // frequency requires knowing the start time. have to make up start time
     // for each train build a schedule
@@ -46,7 +46,7 @@ $(document).ready(function() {
     // compare to current time
     // find train that meets condition- next train has to be > current time
 
-    // complete a for loop that iterates through the train schedule by adding the frequency
+    // complete a for loop t().hat iterates through the train schedule by adding the frequency
     // and then stops as soon as the next train time is > current time. display in the html that next train time
     // and subtract current time from next train to create minutes away
 
@@ -55,10 +55,10 @@ $(document).ready(function() {
     $('#submit-train').on('click', function() {
         trainName = $("#train-name").val().trim();
         destination = $("#destination-name").val().trim();
-        frequency = $('#frequency').val().trim();
+        frequency = $('#frequency').valtrim();
         startTime = $('#first-train-time').val();
-        // nextArrival = 6;
-        // minutesAway = 5;
+
+
 
         //Push the values to the keys in the database
         // Code for handling the push
