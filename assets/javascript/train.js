@@ -30,25 +30,37 @@ $(document).ready(function() {
 
     var database = firebase.database();
 
+
     //Global variables
     var trainName = "";
     var destination = "";
     var frequency;
     var nextArrival;
-    var minutesAway = "";
+    var minutesAway;
     var currentTime = moment();
     console.log(currentTime);
-    var initialTrain;
+    var firstTrain;
 
-    // frequency requires knowing the start time. have to make up start time
-    // for each train build a schedule
-    // user inputs set the startTime
-    // compare to current time
-    // find train that meets condition- next train has to be > current time
+// pre-loaded train times can come from an object 
 
-    // complete a for loop t().hat iterates through the train schedule by adding the frequency
-    // and then stops as soon as the next train time is > current time. display in the html that next train time
-    // and subtract current time from next train to create minutes away
+// var trainSchedule = {
+        //         schedules: [
+        //         {
+        //             trainName: 'What is the capital of Vermont?',
+        //             destination: ['Battleboro', 'Montpelier', 'Barre City', 'Burlington'],
+        //             frequency: ,
+        //             nextArrival,
+        //             minutesAway
+        //         }, {
+        //             trainName: 'What is the capital of Vermont?',
+        //             destination: ['Battleboro', 'Montpelier', 'Barre City', 'Burlington'],
+        //             frequency: ,
+        //             nextArrival,
+        //             minutesAway
+        //         }, 
+        //         ]}
+
+
 
 
     //When the submit for the form is clicked
@@ -57,6 +69,12 @@ $(document).ready(function() {
         destination = $("#destination-name").val().trim();
         frequency = $('#frequency').valtrim();
         startTime = $('#first-train-time').val();
+    
+    for (var i = 0; i < Things.length; i++) {
+        Things[i]
+    }
+
+
 
 
 
