@@ -31,48 +31,60 @@ $(document).ready(function() {
     var database = firebase.database();
 
 
+
+
+    // pre-loaded train times can come from an object 
+
+    // var trainSchedule = {
+    //         schedules: [
+    //         {
+    //             trainName: 'Hogwarts Express',
+    //             destination: ['London', 'Montpelier', 'Barre City', 'Burlington'],
+    //             frequency: ,
+    //             nextArrival,
+    //             minutesAway
+    //         }, {
+    //             trainName: 'Pride and Prejudice',
+    //             destination: ['Battleboro', 'Montpelier', 'Barre City', 'Burlington'],
+    //             frequency: ,
+    //             nextArrival,
+    //             minutesAway
+    //         }, 
+    //         ]}
+
+    // to calculate next arrival and minutes away
+    // next Train time = (frequency of trains * #trains passed) + initial Time 
+    // minutes away to next train === minutes away = moment(time).fromNow()
+    // difference between current time and next train time
+    // nextTrain time - 
+
     //Global variables
     var trainName = "";
     var destination = "";
     var frequency;
     var nextArrival;
-    var minutesAway;
-    var currentTime = moment();
-    console.log(currentTime);
+    var currentTime;
     var firstTrain;
-
-// pre-loaded train times can come from an object 
-
-// var trainSchedule = {
-        //         schedules: [
-        //         {
-        //             trainName: 'What is the capital of Vermont?',
-        //             destination: ['Battleboro', 'Montpelier', 'Barre City', 'Burlington'],
-        //             frequency: ,
-        //             nextArrival,
-        //             minutesAway
-        //         }, {
-        //             trainName: 'What is the capital of Vermont?',
-        //             destination: ['Battleboro', 'Montpelier', 'Barre City', 'Burlington'],
-        //             frequency: ,
-        //             nextArrival,
-        //             minutesAway
-        //         }, 
-        //         ]}
-
-
-
+    var timeDifference;
+    var minutesAway;
+    var nextTrain;
 
     //When the submit for the form is clicked
     $('#submit-train').on('click', function() {
         trainName = $("#train-name").val().trim();
         destination = $("#destination-name").val().trim();
-        frequency = $('#frequency').valtrim();
-        startTime = $('#first-train-time').val();
-    
-    for (var i = 0; i < Things.length; i++) {
-        Things[i]
-    }
+        frequency = $('#frequency').val().trim();
+        firstTrain = moment($("#first-train-time").val().trim(), "HH:mm").subtract(1, "years").format("X");
+
+        timeDifference = moment().diff(moment.unix(firstTrain), "minutes");
+        minutesAway = frequency - (timeDifference % frequency);
+        nextTrain = moment().add(minutesAway, "minutes").format('HH:mm');
+
+        console.log("currentTime =", moment());
+        console.log("time difference =", timeDifference);
+        console.log("firstTrain=", firstTrain);
+        console.log("minutesAway =", minutesAway);
+        console.log("nextTrain =", nextTrain);
 
 
 
@@ -85,7 +97,7 @@ $(document).ready(function() {
             trainName: trainName,
             destination: destination,
             frequency: frequency,
-            startTime: startTime
+            startTime: firstTrain
 
             // nextArrival: nextArrival,
             // minutesAway: minutesAway
