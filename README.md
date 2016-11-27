@@ -1,6 +1,19 @@
 # Train_Scheduler
-This is the train scheduler assignment for Week 6. The aim of this project is to both have loaded train schedules that appear on a page that will show the time of the next train and the minutes away that train is from the current time, as well as a form that can add trains to the schedule and output the pre-loaded information given the new train's frequency of arrival and start time. 
-Step 1: Create skeleton files needed for project: index.html, assets folder to hold js, css, images folders that will then house the primary javascript, style, and image files for the project
-Step 2: Make links to both css and to javascript within index.html. Link to all of the stylesheets in the head of the html page. The local css page is at the bottom, followed by bootstrap. This allows for the local stylesheet to take precedence over the bootstrap file so that those changes override any pre-set bootstrap styles. Right above the body tag, link to the local javascript (train.js) file, and then above it, link to the moment cdn so that the times can be linked, then to the firebase.js so its database can be used for the project, and then above it, to jquery, so that library can be accessed in the .js file.
-Step 3: Inside the body, create a container that will hold two tables: one will hold both pre-loaded trains and their times, and the second will hold form fields and a submit button so that once all the values are entered, that new train information is loaded in the table above, and minutes away from current time and next train are calculated and added as well. 
-Step 4: Create the train.js file
+This is the train scheduler assignment for Week 6. The goal of this project is to have both pre-loaded and appended train schedules that appear on a page that will show the following: 
+-train name
+-train destination
+-frequency of train
+-train's next arrival time as it relates to the current time
+-minutes away that train is from the current time
+
+Step 1: Make the primary files needed for project: 
+-index.html
+-assets folder
+--nested in the assets folder are the following folders:
+a) css folder for style.css document
+b) images folder for any images to be applied as styling for the document
+c) javascript folder for the train.js document 
+
+Step 2: Link the local CSS and JS files to the HTML page, as well as the JQuery library and Bootstrap library so that they can be accessed during the project. Later on when styling is being performed for the page, Google font links can be added to the HTML page for use as part of styling the page- in this instance, there would be a link for the HTML page and a specific font name to be used in the CSS page.  
+
+Step 3: Create skeleton HTML page so that the javascript document can be used to dynamically update information displayed on the page.
