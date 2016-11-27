@@ -71,6 +71,10 @@ $(document).ready(function() {
 
     //When the submit for the form is clicked
     $('#submit-train').on('click', function() {
+        // $('#train-add').empty();
+
+
+
         trainName = $("#train-name").val().trim();
         destination = $("#destination-name").val().trim();
         frequency = $('#frequency').val().trim();
@@ -86,10 +90,6 @@ $(document).ready(function() {
         console.log("minutesAway =", minutesAway);
         console.log("nextTrain =", nextTrain);
 
-
-
-
-
         //Push the values to the keys in the database
         // Code for handling the push
 
@@ -97,10 +97,9 @@ $(document).ready(function() {
             trainName: trainName,
             destination: destination,
             frequency: frequency,
-            startTime: firstTrain
-
-            // nextArrival: nextArrival,
-            // minutesAway: minutesAway
+            startTime: firstTrain,
+            nextArrival: nextTrain,
+            minutesAway: minutesAway,
 
         });
 
@@ -111,35 +110,31 @@ $(document).ready(function() {
     // // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
     database.ref().on("child_added", function(childSnapshot) {
 
-        //     // Log everything that's coming out of snapshot
-        console.log(childSnapshot.val().trainName);
+            //     // Log everything that's coming out of snapshot
+            console.log(childSnapshot.val().trainName);
+            console.log(childSnapshot.val().destination);
+            console.log(childSnapshot.val().frequency);
+            console.log(childSnapshot.val().startTime);
+            console.log(childSnapshot.val().nextArrival);
+            console.log(childSnapshot.val().minutesAway);
 
-        //     console.log(childSnapshot.val().role);
-        //     console.log(childSnapshot.val().startDate);
-        //     console.log(childSnapshot.val().monthlyRate);
-        //     console.log(childSnapshot.val().dateAdded);
-        //     console.log(childSnapshot.val().monthsWorked);
-        //     console.log(childSnapshot.val().billed);
-        // var row = $('<tr>');
+            var row = $('<tr>');
+            $(row).append($('<td>').text(childSnapshot.val().trainName));
+            $(row).append($('<td>').text(childSnapshot.val().destination));
+            $(row).append($('<td>').text(childSnapshot.val().frequency));
+            // $(row).append($('<td>').text(childSnapshot.val().firstTrain));
 
-
-        // $(row).append($('<td>').text(childSnapshot.val().trainName));
-
-
-        //     $(row).append($('<td>').text(childSnapshot.val().role));
-        //     $(row).append($('<td>').text(childSnapshot.val().startDate));
-        //     $(row).append($('<td>').text(childSnapshot.val().monthsWorked));
-        //     $(row).append($('<td>').text("$" + childSnapshot.val().monthlyRate));
-        //     $(row).append($('<td>').text("$" + childSnapshot.val().billed));
-        //     $('#table-body').append(row);
+            $(row).append($('<td>').text(childSnapshot.val().nextArrival));
+            $(row).append($('<td>').text(childSnapshot.val().minutesAway));
+            $('#table-body').append(row);
 
 
-        //     // Handle the errors
-        // },
-        // function(errorObject) {
-        //     console.log("Errors handled: " + errorObject.code);
+            // Handle the errors
+        },
+        function(errorObject) {
+            console.log("Errors handled: " + errorObject.code);
 
-    });
+        });
 
 
 
