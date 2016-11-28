@@ -4,13 +4,16 @@ body {
     background-size: cover;
 }
 
-.jumbotron,
-#header-one {
+.jumbotron {
     background-color: rgb(182, 57, 138);
     color: white;
+    opacity: 0.75;
 }
 
 #header-one {
+    background-color: rgb(182, 57, 138);
+    color: white;
+    opacity: 0.75;
     font-size: 20px;
     font-weight: bold;
 }

@@ -1,22 +1,5 @@
+// initialize the javascript document 
 $(document).ready(function() {
-    // var tablePosition = 0;
-    // $('#submit-button').on('click', function() {
-    //     var row = $('#table').insertRow(tablePosition);
-    //     var cell0 = row.insertCell(0);
-    //     var cell1 = row.insertCell(1);
-    //     var cell2 = row.insertCell(2);
-    //     var cell3 = row.insertCell(3);
-    //     var cell4 = row.insertCell(4);
-    //     var cell5 = row.insertCell(5);
-    // });
-
-    // should be getting the x
-    // var trainSchedule = [
-    //     {
-    //         train: '',
-    //         times: '',
-    //     }
-    // ];
 
     // Initialize Firebase
     var config = {
@@ -30,37 +13,9 @@ $(document).ready(function() {
 
     var database = firebase.database();
 
-
-
-
-    // pre-loaded train times can come from an object 
-
-    // var trainSchedule = {
-    //         schedules: [
-    //         {
-    //             trainName: 'Hogwarts Express',
-    //             destination: ['London', 'Montpelier', 'Barre City', 'Burlington'],
-    //             frequency: ,
-    //             nextArrival,
-    //             minutesAway
-    //         }, {
-    //             trainName: 'Pride and Prejudice',
-    //             destination: ['Battleboro', 'Montpelier', 'Barre City', 'Burlington'],
-    //             frequency: ,
-    //             nextArrival,
-    //             minutesAway
-    //         }, 
-    //         ]}
-
-    // to calculate next arrival and minutes away
-    // next Train time = (frequency of trains * #trains passed) + initial Time 
-    // minutes away to next train === minutes away = moment(time).fromNow()
-    // difference between current time and next train time
-    // nextTrain time - 
-
     //Global variables
-    var trainName = "";
-    var destination = "";
+    var trainName = '';
+    var destination = '';
     var frequency;
     var nextArrival;
     var currentTime;
@@ -69,30 +24,20 @@ $(document).ready(function() {
     var minutesAway;
     var nextTrain;
 
-    //When the submit for the form is clicked
+    //Submit button for adding new trains to the schedule
     $('#submit-train').on('click', function() {
-        // $('#train-add').empty();
 
-
-
-        trainName = $("#train-name").val().trim();
-        destination = $("#destination-name").val().trim();
+        // Grabs user input. Perform calculations for firstTrain, timeDifference, nextTrain by using moment
+        trainName = $('#train-name').val().trim();
+        destination = $('#destination-name').val().trim();
         frequency = $('#frequency').val().trim();
-        firstTrain = moment($("#first-train-time").val().trim(), "HH:mm").subtract(1, "years").format("X");
-
-        timeDifference = moment().diff(moment.unix(firstTrain), "minutes");
+        firstTrain = moment($('#first-train-time').val().trim(), 'HH:mm').subtract(1, 'years').format('X');
+        timeDifference = moment().diff(moment.unix(firstTrain), 'minutes');
         minutesAway = frequency - (timeDifference % frequency);
-        nextTrain = moment().add(minutesAway, "minutes").format('HH:mm');
-
-        console.log("currentTime =", moment());
-        console.log("time difference =", timeDifference);
-        console.log("firstTrain=", firstTrain);
-        console.log("minutesAway =", minutesAway);
-        console.log("nextTrain =", nextTrain);
+        nextTrain = moment().add(minutesAway, 'minutes').format('HH:mm');
 
         //Push the values to the keys in the database
         // Code for handling the push
-
         database.ref().push({
             trainName: trainName,
             destination: destination,
@@ -103,27 +48,23 @@ $(document).ready(function() {
 
         });
 
+        // Clears all of the text-boxes on the page after their values have been submitted to Firebase
+        $('#train-name').val('');
+        $('#destination-name').val('');
+        $('#first-train-time').val('');
+        $('#frequency').val('');
+
         // Don't refresh the page!
         return false;
     });
 
     // // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
-    database.ref().on("child_added", function(childSnapshot) {
-
-            //     // Log everything that's coming out of snapshot
-            console.log(childSnapshot.val().trainName);
-            console.log(childSnapshot.val().destination);
-            console.log(childSnapshot.val().frequency);
-            console.log(childSnapshot.val().startTime);
-            console.log(childSnapshot.val().nextArrival);
-            console.log(childSnapshot.val().minutesAway);
+    database.ref().on('child_added', function(childSnapshot) {
 
             var row = $('<tr>');
             $(row).append($('<td>').text(childSnapshot.val().trainName));
             $(row).append($('<td>').text(childSnapshot.val().destination));
             $(row).append($('<td>').text(childSnapshot.val().frequency));
-            // $(row).append($('<td>').text(childSnapshot.val().firstTrain));
-
             $(row).append($('<td>').text(childSnapshot.val().nextArrival));
             $(row).append($('<td>').text(childSnapshot.val().minutesAway));
             $('#table-body').append(row);
@@ -132,11 +73,7 @@ $(document).ready(function() {
             // Handle the errors
         },
         function(errorObject) {
-            console.log("Errors handled: " + errorObject.code);
+            console.log('Errors handled: ' + errorObject.code);
 
         });
-
-
-
-
 });
