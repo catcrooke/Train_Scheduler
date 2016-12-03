@@ -31,7 +31,9 @@ $(document).ready(function() {
         trainName = $('#train-name').val().trim();
         destination = $('#destination-name').val().trim();
         frequency = $('#frequency').val().trim();
-        firstTrain = moment($('#first-train-time').val().trim(), 'HH:mm').subtract(1, 'years').format('X');
+        hour = $('#first-train-time-hour');
+        minute = $('#first-train-time-minute');
+        firstTrain = moment(hour.val().trim() + ":" + minute.val().trim(), 'HH:mm').subtract(1, 'years').format('X');
         timeDifference = moment().diff(moment.unix(firstTrain), 'minutes');
         minutesAway = frequency - (timeDifference % frequency);
         nextTrain = moment().add(minutesAway, 'minutes').format('HH:mm');
