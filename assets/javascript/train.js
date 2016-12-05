@@ -1,7 +1,6 @@
 // initialize the javascript document 
 $(document).ready(function() {
 
-    // function renderData(time, ) {
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyBA9aMvPQ6pxeyEC4nS2WPR9rR2FxhEqYI",
@@ -58,7 +57,7 @@ $(document).ready(function() {
     function render() {
         // rows variable creates divs dynamically
         var rows = $('<div>');
-        // for loop goes through all of the trains currently appended to the DOM
+        // for loop goes through all of the trains listed in the trains array (trains inputed through the train added table)
         for (var i = 0; i < trains.length; i++) {
             // setting the variable train equal to the trains variable at each index
             var train = trains[i];
@@ -85,7 +84,7 @@ $(document).ready(function() {
             rows.append(row);
 
         }
-        // table body is emptied so that all cells update when minutes away and the next train time are updated 
+        // table body is emptied, then the dynamically created div from the rows variable is re-appended with the children 
         $('#table-body').empty().append(rows.children());
 
     }

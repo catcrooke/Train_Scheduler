@@ -2,6 +2,8 @@ body {
     background-image: url(../images/metromap.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: rgb(249, 218, 216);
+    font-family: 'Quattrocento Sans', sans-serif;
 }
 
 .jumbotron {
@@ -24,9 +26,5 @@ body {
 
 h1 {
     text-align: center;
-    font-family: 'Quattrocento Sans', sans-serif;
-}
-
-body {
     font-family: 'Quattrocento Sans', sans-serif;
 }
