@@ -104,14 +104,10 @@ $(document).ready(function() {
             // call the render function
             render();
 
-
-
             // Handle the errors
         },
-        function(errorObject) {
 
-
-        });
+        function(errorObject) {});
     // }
 
 });
