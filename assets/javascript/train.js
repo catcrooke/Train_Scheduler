@@ -1,4 +1,4 @@
-// initialize the javascript document 
+// when the document initializes, run this code: 
 $(document).ready(function() {
 
     // Initialize Firebase
@@ -13,27 +13,20 @@ $(document).ready(function() {
 
     var database = firebase.database();
 
-    //Global variables
-    var trainName = '';
-    var destination = '';
-    var frequency;
-    var nextArrival;
-    var currentTime;
-    var firstTrain;
-    var timeDifference;
-    var minutesAway;
-    var nextTrain;
-
     //Submit button for adding new trains to the schedule
     $('#submit-train').on('click', function() {
 
         // Grabs user input. firstTrain is displayed in the military time format
-        trainName = $('#train-name').val().trim();
-        destination = $('#destination-name').val().trim();
-        frequency = $('#frequency').val().trim();
-        hour = $('#first-train-time-hour');
-        minute = $('#first-train-time-minute');
-        firstTrain = moment(hour.val().trim() + ":" + minute.val().trim(), 'HH:mm').subtract(1, 'years').format('X');
+        var trainName = $('#train-name').val().trim();
+        var destination = $('#destination-name').val().trim();
+        var frequency = $('#frequency').val().trim();
+        var hour = $('#first-train-time-hour');
+        var minute = $('#first-train-time-minute');
+        var hourValue = hour.val().trim();
+        var minuteValue = minute.val().trim();
+        var hourMinute = hourValue + ":" + minuteValue;
+        var firstTrain = moment(hourMinute, 'HH:mm').subtract(1, 'years').unix();
+
 
         //Push the values to the keys in the database. Code for handling the push
         database.ref().push({
@@ -44,10 +37,7 @@ $(document).ready(function() {
         });
 
         // Clears all of the text-boxes on the page after their values have been submitted to Firebase
-        $('#train-name').val('');
-        $('#destination-name').val('');
-        $('#first-train-time').val('');
-        $('#frequency').val('');
+        $('.new-train-input').val('');
 
         // Don't refresh the page!
         return false;
