@@ -78,7 +78,7 @@ $(document).ready(function() {
         $('#table-body').empty().append(rows.children());
 
     }
-    // set Interval takes the render fuction updates it at a specified interval, which here is every minute 
+    // set Interval takes the render fuction updates it every minute 
     setInterval(render, 1000 * 60);
 
     // trains variable is initialized to an empty array
